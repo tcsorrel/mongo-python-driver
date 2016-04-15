@@ -250,28 +250,6 @@ extra_opts = {
 if sys.version_info[:2] == (2, 6):
     extra_opts['tests_require'] = "unittest2"
 
-if "--no_ext" in sys.argv:
-    sys.argv.remove("--no_ext")
-elif (sys.platform.startswith("java") or
-      sys.platform == "cli" or
-      "PyPy" in sys.version):
-    sys.stdout.write("""
-*****************************************************\n
-The optional C extensions are currently not supported\n
-by this python implementation.\n
-*****************************************************\n
-""")
-elif sys.byteorder == "big":
-    sys.stdout.write("""
-*****************************************************\n
-The optional C extensions are currently not supported\n
-on big endian platforms and will not be built.\n
-Performance may be degraded.\n
-*****************************************************\n
-""")
-else:
-    extra_opts['ext_modules'] = ext_modules
-
 setup(
     name="pymongo",
     version=version,
